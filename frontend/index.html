@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Manager – OS Mini Project</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-icon">📁</span>
+        <span>FileManager</span>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-view="files">
+          <span>📄</span> All Files
+        </button>
+        <button class="nav-btn" id="btn-new-file">
+          <span>➕</span> New File
+        </button>
+        <button class="nav-btn" id="btn-new-folder">
+          <span>📂</span> New Folder
+        </button>
+        <button class="nav-btn" id="btn-upload">
+          <span>⬆️</span> Upload
+        </button>
+      </nav>
+      <div class="storage-box">
+        <div class="storage-label">Storage Used</div>
+        <div class="storage-value" id="storage-usage">0 B</div>
+        <div class="storage-bar">
+          <div class="storage-fill" id="storage-fill"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumb" id="breadcrumb">
+          <span class="crumb" data-path="">Home</span>
+        </div>
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Search files..." />
+          <button id="search-btn">🔍</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="toolbar">
+          <h2 id="current-title">All Files</h2>
+          <div class="view-actions">
+            <button id="refresh-btn" title="Refresh">↻</button>
+          </div>
+        </div>
+
+        <div class="file-list-header">
+          <span class="col-name">Name</span>
+          <span class="col-size">Size</span>
+          <span class="col-date">Modified</span>
+          <span class="col-actions">Actions</span>
+        </div>
+
+        <div id="file-list" class="file-list">
+          <!-- populated by JS -->
+        </div>
+
+        <div id="empty-state" class="empty-state hidden">
+          <p>This folder is empty</p>
+          <button id="empty-upload">Upload a file</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="preview-title">Preview</h3>
+        <button class="modal-close" id="preview-close">×</button>
+      </div>
+      <pre id="preview-body" class="preview-body"></pre>
+    </div>
+  </div>
+
+  <!-- Rename Modal -->
+  <div id="rename-modal" class="modal hidden">
+    <div class="modal-content small">
+      <div class="modal-header">
+        <h3>Rename</h3>
+        <button class="modal-close" id="rename-close">×</button>
+      </div>
+      <input type="text" id="rename-input" class="modal-input" />
+      <div class="modal-actions">
+        <button id="rename-cancel" class="btn-secondary">Cancel</button>
+        <button id="rename-confirm" class="btn-primary">Rename</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Modal -->
+  <div id="create-modal" class="modal hidden">
+    <div class="modal-content small">
+      <div class="modal-header">
+        <h3 id="create-title">Create</h3>
+        <button class="modal-close" id="create-close">×</button>
+      </div>
+      <input type="text" id="create-input" class="modal-input" placeholder="Name" />
+      <div class="modal-actions">
+        <button id="create-cancel" class="btn-secondary">Cancel</button>
+        <button id="create-confirm" class="btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <input type="file" id="file-input" hidden multiple />
+
+  <script src="script.js"></script>
+</body>
+</html>
